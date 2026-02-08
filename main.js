@@ -74,9 +74,20 @@ document.getElementById('menu-toggle').onclick = () => toggle(true);
 document.getElementById('side-menu-overlay').onclick = () => toggle(false);
 document.querySelectorAll('.menu-link').forEach(l => l.onclick = () => toggle(false));
 
-// Loader
-window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('fade-out'), 800));
-setTimeout(() => document.getElementById('loader').classList.add('fade-out'), 4000);
+// Loader - Fast Premium Fade
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    const planet = document.querySelector('.loader-planet-wrap');
+
+    // Quick orbit, then shrink-fade
+    setTimeout(() => {
+        if (planet) planet.classList.add('dissolve');
+
+        setTimeout(() => {
+            if (loader) loader.classList.add('fade-out');
+        }, 300);
+    }, 800);
+});
 
 // Resize
 window.addEventListener('resize', () => {
